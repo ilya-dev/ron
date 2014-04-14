@@ -15,5 +15,19 @@ class MethodBuilderSpec extends ObjectBehavior {
         $this->shouldHaveType('Ron\Builders\MethodBuilder');
     }
 
+    function it_builds_the_valid_method_declaration()
+    {
+        $this->build()->shouldReturn('public function foo() {  }');
+    }
+
+    function it_changes_the_visibility_of_the_method()
+    {
+        $this->shouldThrow('UnexpectedValueException')->duringVisibility('sdgwdsaav');
+
+        $this->visibility('protected');
+
+        $this->build()->shouldReturn('protected function foo() {  }');
+    }
+
 }
 
