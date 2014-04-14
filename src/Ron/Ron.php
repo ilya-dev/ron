@@ -41,5 +41,16 @@ class Ron {
         return $this->reflector;
     }
 
+    /**
+     * Create a new class
+     *
+     * @return \Ron\Entity
+     */
+    public function create()
+    {
+        // just make it green
+        return new Entity;
+    }
+
 }
 

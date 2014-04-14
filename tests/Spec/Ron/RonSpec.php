@@ -23,5 +23,13 @@ class RonSpec extends ObjectBehavior {
         $this->getReflector()->shouldReturn($reflector);
     }
 
+    function it_creates_a_new_class(Reflector $reflector)
+    {
+        // $reflector->isInterface()->shouldBeCalled();
+        // $reflector->getMethods(Argument::any())->shouldBeCalled();
+
+        $this->create()->shouldHaveType('Ron\Entity');
+    }
+
 }
 
