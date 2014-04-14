@@ -17,6 +17,13 @@ class ClassBuilder {
     protected $interfaces;
 
     /**
+     * The classes this class extends
+     *
+     * @var array
+     */
+    protected $classes;
+
+    /**
      * The constructor
      *
      * @param string $name
@@ -27,6 +34,8 @@ class ClassBuilder {
         $this->setName($name);
 
         $this->interfaces = [];
+
+        $this->classes = [];
     }
 
     /**
@@ -38,23 +47,41 @@ class ClassBuilder {
     {
         $implements = '';
 
+        $extends = '';
+
         if ( ! empty($this->interfaces))
         {
             $implements = ' implements '.\implode(', ', $this->interfaces);
         }
 
-        return "class {$this->name}{$implements} {  }";
+        if ( ! empty($this->classes))
+        {
+            $extends = ' extends '.\implode(', ', $this->classes);
+        }
+
+        return "class {$this->name}{$extends}{$implements} {  }";
     }
 
     /**
      * "Implements" an interface
      *
      * @param string $interface
-     * @return self
+     * @return void
      */
     public function implement($interface)
     {
         $this->interfaces[] = $interface;
+    }
+
+    /**
+     * "Extends" a class
+     *
+     * @param string $class
+     * @return void
+     */
+    public function extend($class)
+    {
+        $this->classes[] = $class;
     }
 
     /**

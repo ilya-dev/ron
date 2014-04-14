@@ -40,5 +40,16 @@ class ClassBuilderSpec extends ObjectBehavior {
         $this->build()->shouldReturn('class foo implements bar, baz {  }');
     }
 
+    function it_extends_the_class()
+    {
+        $this->extend('bar');
+
+        $this->build()->shouldReturn('class foo extends bar {  }');
+
+        $this->extend('baz');
+
+        $this->build()->shouldReturn('class foo extends bar, baz {  }');
+    }
+
 }
 
