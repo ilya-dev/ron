@@ -2,12 +2,13 @@
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Ron\EvalWorker;
 
 class EntitySpec extends ObjectBehavior {
 
-    function let()
+    function let(EvalWorker $worker)
     {
-        $this->beConstructedWith('some code');
+        $this->beConstructedWith('some code', $worker);
     }
 
     function it_is_initializable()

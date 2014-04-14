@@ -17,16 +17,26 @@ class Entity {
     protected $code;
 
     /**
+     * The EvalWorker instance
+     *
+     * @var \Ron\EvalWorker
+     */
+    protected $evalWorker;
+
+    /**
      * The constructor
      *
      * @param string $code
+     * @param \Ron\EvalWorker|null $worker
      * @return \Ron\Entity
      */
-    public function __construct($code)
+    public function __construct($code, EvalWorker $worker = null)
     {
         $this->className = $this->generateClassName();
 
         $this->setCode($code);
+
+        $this->evalWorker = $worker ?: new EvalWorker;
     }
 
     /**
