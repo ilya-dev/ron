@@ -30,8 +30,21 @@ class ParameterBuilderSpec extends ObjectBehavior {
     function it_appends_the_default_value()
     {
         $this->byDefault(null);
-
         $this->build()->shouldReturn('$foo = NULL');
+
+        $this->byDefault(42);
+        $this->build()->shouldReturn('$foo = 42');
+
+        $this->byDefault('wow');
+        $this->build()->shouldReturn("\$foo = 'wow'");
+    }
+
+    function it_ties_things_together_correctly()
+    {
+        $this->typeHint('Bar\Wow');
+        $this->byDefault(null);
+
+        $this->build()->shouldReturn('Bar\Wow $foo = NULL');
     }
 
 }
