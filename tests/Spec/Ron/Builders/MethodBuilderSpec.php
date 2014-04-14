@@ -2,6 +2,7 @@
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Ron\Builders\ParameterBuilder;
 
 class MethodBuilderSpec extends ObjectBehavior {
 
@@ -27,6 +28,17 @@ class MethodBuilderSpec extends ObjectBehavior {
         $this->visibility('protected');
 
         $this->build()->shouldReturn('protected function foo() {  }');
+    }
+
+    function it_places_the_parameter_correctly(ParameterBuilder $parameter)
+    {
+        $parameter->build()->willReturn('\stdClass $baz = NULL');
+        $this->parameter($parameter);
+
+        $parameter->build()->willReturn('$wow');
+        $this->parameter($parameter);
+
+        $this->build()->shouldReturn('public function foo(\stdClass $baz = NULL, $wow) {  }');
     }
 
 }

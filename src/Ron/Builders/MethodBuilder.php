@@ -12,6 +12,13 @@ class MethodBuilder extends Builder {
     protected $visibility = 'public';
 
     /**
+     * The parameters
+     *
+     * @var array
+     */
+    protected $parameters = [];
+
+    /**
      * Sets the visibility mode
      *
      * @param string $mode
@@ -29,13 +36,31 @@ class MethodBuilder extends Builder {
     }
 
     /**
+     * Adds the parameter
+     *
+     * @param ParameterBuilder $parameter
+     * @return void
+     */
+    public function parameter(ParameterBuilder $parameter)
+    {
+        $this->parameters[] = $parameter->build();
+    }
+
+    /**
      * Builds the class (valid PHP code)
      *
      * @return string
      */
     public function build()
     {
-        return "{$this->visibility} function {$this->name}() {  }";
+        $parameters = '';
+
+        if ( ! empty($this->parameters))
+        {
+            $parameters = \implode(', ', $this->parameters);
+        }
+
+        return "{$this->visibility} function {$this->name}({$parameters}) {  }";
     }
 
 }
