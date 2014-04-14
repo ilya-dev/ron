@@ -30,6 +30,13 @@ class EntitySpec extends ObjectBehavior {
         $this->getClassName()->shouldBeUnique();
     }
 
+    function it_evaluates_the_code_using_the_EvalWorker(EvalWorker $worker)
+    {
+        $worker->evaluate('some code')->shouldBeCalled();
+
+        $this->apply();
+    }
+
     /**
      * Returns the inline matchers
      *

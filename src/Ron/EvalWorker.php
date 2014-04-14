@@ -3,7 +3,7 @@
 class EvalWorker {
 
     /**
-     * Evaluate the code
+     * Evaluates the code
      *
      * @param string $code
      * @return mixed

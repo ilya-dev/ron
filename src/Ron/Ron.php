@@ -42,7 +42,7 @@ class Ron {
     }
 
     /**
-     * Create a new class
+     * Creates a new class
      *
      * @param array $methods
      * @return \Ron\Entity

@@ -40,6 +40,16 @@ class Entity {
     }
 
     /**
+     * Makes the code available in runtime
+     *
+     * @return void
+     */
+    public function apply()
+    {
+        $this->evalWorker->evaluate($this->code);
+    }
+
+    /**
      * Sets the code
      *
      * @throws \InvalidArgumentException
@@ -79,7 +89,7 @@ class Entity {
     }
 
     /**
-     * Generate the unique class name
+     * Generates the unique class name
      *
      * @return string
      */
