@@ -41,5 +41,14 @@ class MethodBuilderSpec extends ObjectBehavior {
         $this->build()->shouldReturn('public function foo(\stdClass $baz = NULL, $wow) {  }');
     }
 
+    function it_specifies_the_return_value()
+    {
+        $this->returnValue(null);
+        $this->build()->shouldReturn('public function foo() {  }');
+
+        $this->returnValue('43foobar');
+        $this->build()->shouldReturn('public function foo() { return \'43foobar\'; }');
+    }
+
 }
 

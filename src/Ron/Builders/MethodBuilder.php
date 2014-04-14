@@ -19,6 +19,24 @@ class MethodBuilder extends Builder {
     protected $parameters = [];
 
     /**
+     * The return value
+     *
+     * @var mixed|null
+     */
+    protected $returnValue = null;
+
+    /**
+     * Specifies the return value
+     *
+     * @param mixed $value
+     * @return void
+     */
+    public function returnValue($value)
+    {
+        $this->returnValue = $value;
+    }
+
+    /**
      * Sets the visibility mode
      *
      * @param string $mode
@@ -60,7 +78,9 @@ class MethodBuilder extends Builder {
             $parameters = \implode(', ', $this->parameters);
         }
 
-        return "{$this->visibility} function {$this->name}({$parameters}) {  }";
+        $returnValue = \is_null($this->returnValue) ? '' : 'return '.\var_export($this->returnValue, true).';';
+
+        return "{$this->visibility} function {$this->name}({$parameters}) { {$returnValue} }";
     }
 
 }
