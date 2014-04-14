@@ -44,9 +44,10 @@ class Ron {
     /**
      * Create a new class
      *
+     * @param array $methods
      * @return \Ron\Entity
      */
-    public function create()
+    public function create(array $methods = [])
     {
         // just make it green
         return new Entity;
