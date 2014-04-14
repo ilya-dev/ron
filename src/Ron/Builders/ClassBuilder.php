@@ -19,6 +19,13 @@ class ClassBuilder extends Builder {
     protected $classes;
 
     /**
+     * The methods
+     *
+     * @var array
+     */
+    protected $methods = [];
+
+    /**
      * The constructor
      *
      * @param string $name
@@ -44,6 +51,8 @@ class ClassBuilder extends Builder {
 
         $extends = '';
 
+        $methods = '';
+
         if ( ! empty($this->interfaces))
         {
             $implements = ' implements '.\implode(', ', $this->interfaces);
@@ -54,7 +63,23 @@ class ClassBuilder extends Builder {
             $extends = ' extends '.\implode(', ', $this->classes);
         }
 
-        return "class {$this->name}{$extends}{$implements} {  }";
+        if ( ! empty($this->methods))
+        {
+            $methods = \implode(' ', $this->methods);
+        }
+
+        return "class {$this->name}{$extends}{$implements} { {$methods} }";
+    }
+
+    /**
+     * Adds the method
+     *
+     * @param MethodBuilder $method
+     * @return void
+     */
+    public function method(MethodBuilder $method)
+    {
+        $this->methods[] = $method->build();
     }
 
     /**

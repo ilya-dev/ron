@@ -2,6 +2,7 @@
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Ron\Builders\MethodBuilder;
 
 class ClassBuilderSpec extends ObjectBehavior {
 
@@ -58,6 +59,19 @@ class ClassBuilderSpec extends ObjectBehavior {
         $this->extend('baz');
 
         $this->build()->shouldReturn('class foo extends baz implements bar {  }');
+    }
+
+    function it_places_the_method_correctly(MethodBuilder $method)
+    {
+        $method->build()->willReturn('public function foo($foo) {  }');
+        $this->method($method);
+
+        $method->build()->willReturn('private function wow() {  }');
+        $this->method($method);
+
+        $this->build()->shouldReturn(
+            'class foo { public function foo($foo) {  } private function wow() {  } }'
+        );
     }
 
 }
