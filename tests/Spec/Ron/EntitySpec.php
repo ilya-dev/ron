@@ -5,9 +5,23 @@ use Prophecy\Argument;
 
 class EntitySpec extends ObjectBehavior {
 
+    function let()
+    {
+        $this->beConstructedWith('some code');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Ron\Entity');
+    }
+
+    function it_sets_and_returns_the_code()
+    {
+        $this->shouldThrow($e = 'InvalidArgumentException')->duringSetCode(null);
+
+        $this->shouldNotThrow($e)->duringSetCode($code = 'dumb code');
+
+        $this->getCode()->shouldBeEqualTo($code);
     }
 
     function it_picks_a_unique_class_name()
@@ -17,7 +31,7 @@ class EntitySpec extends ObjectBehavior {
 
     /**
      * Returns the inline matchers
-     * 
+     *
      * @return array
      */
     public function getMatchers()

@@ -50,7 +50,7 @@ class Ron {
     public function create(array $methods = [])
     {
         // just make it green
-        return new Entity;
+        return new Entity('code');
     }
 
 }
