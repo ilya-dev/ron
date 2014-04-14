@@ -12,6 +12,20 @@ class ParameterBuilder extends Builder {
     protected $typeHint = null;
 
     /**
+     * The default value
+     *
+     * @var mixed
+     */
+    protected $defaultValue;
+
+    /**
+     * Whether the default value was set
+     *
+     * @var bool
+     */
+    protected $defaultIsSet = false;
+
+    /**
      * Adds the type hint
      *
      * @param string $class
@@ -23,13 +37,28 @@ class ParameterBuilder extends Builder {
     }
 
     /**
+     * Sets the default value
+     *
+     * @param mixed $value
+     * @return void
+     */
+    public function byDefault($value)
+    {
+        $this->defaultIsSet = true;
+
+        $this->defaultValue = $value;
+    }
+
+    /**
      * Builds the class (valid PHP code)
      *
      * @return string
      */
     public function build()
     {
-        return \trim(\sprintf('%s $%s', $this->typeHint, $this->name));
+        $default = $this->defaultIsSet ? '= '.\var_export($this->defaultValue, true) : '';
+
+        return \trim(\sprintf('%s $%s %s', $this->typeHint, $this->name, $default));
     }
 
 }

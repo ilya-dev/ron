@@ -27,5 +27,12 @@ class ParameterBuilderSpec extends ObjectBehavior {
         $this->build()->shouldReturn('\stdClass $foo');
     }
 
+    function it_appends_the_default_value()
+    {
+        $this->byDefault(null);
+
+        $this->build()->shouldReturn('$foo = NULL');
+    }
+
 }
 
