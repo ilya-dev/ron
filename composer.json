@@ -1,0 +1,19 @@
+{
+    "name": "ilya/ron",
+    "description": "Extend classes and create implementations in runtime",
+    "keywords": ["php", "extend", "class", "implementation", "interface", "implement"],
+    "license": "MIT",
+
+    "require-dev": {
+        "phpspec/phpspec": "~2"
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Ron\\": "src/Ron/"
+        }
+    }
+}
