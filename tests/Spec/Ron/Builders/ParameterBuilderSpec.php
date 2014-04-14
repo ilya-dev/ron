@@ -15,5 +15,17 @@ class ParameterBuilderSpec extends ObjectBehavior {
         $this->shouldHaveType('Ron\Builders\ParameterBuilder');
     }
 
+    function it_builds_the_parameter_declaration()
+    {
+        $this->build()->shouldReturn('$foo');
+    }
+
+    function it_prepends_the_type_hint()
+    {
+        $this->typeHint('\stdClass');
+
+        $this->build()->shouldReturn('\stdClass $foo');
+    }
+
 }
 
