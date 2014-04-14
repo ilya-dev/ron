@@ -24,5 +24,10 @@ class ClassBuilderSpec extends ObjectBehavior {
         $this->getName()->shouldBeEqualTo($name);
     }
 
+    function it_builds_the_class_declaration()
+    {
+        $this->build()->shouldReturn('class foo {  }');
+    }
+
 }
 

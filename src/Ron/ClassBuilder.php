@@ -21,6 +21,16 @@ class ClassBuilder {
     }
 
     /**
+     * Builds the class (valid PHP code)
+     *
+     * @return string
+     */
+    public function build()
+    {
+        return "class {$this->name} {  }";
+    }
+
+    /**
      * Sets the class name
      *
      * @throws \InvalidArgumentException
