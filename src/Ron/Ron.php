@@ -10,14 +10,24 @@ class Ron {
     protected $reflector;
 
     /**
+     * The Transformer instance
+     *
+     * @var Transformer
+     */
+    protected $transformer;
+
+    /**
      * The constructor
      *
      * @param \ReflectionClass $reflector
+     * @param Transformer|null $transformer
      * @return \Ron\Ron
      */
-    public function __construct(\ReflectionClass $reflector)
+    public function __construct(\ReflectionClass $reflector, Transformer $transformer = null)
     {
         $this->setReflector($reflector);
+
+        $this->transformer = $transformer ?: new Transformer;
     }
 
     /**
