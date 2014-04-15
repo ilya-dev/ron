@@ -33,7 +33,14 @@ class ParameterBuilder extends Builder {
      */
     public function typeHint($class)
     {
-        if (\is_object($class)) $class = '\\'.\get_class($class);
+        if ($class instanceof \ReflectionClass)
+        {
+            $class = $class->getName();
+        }
+        elseif (\is_object($class))
+        {
+            $class = \get_class($class);
+        }
 
         $this->typeHint = $class;
     }
