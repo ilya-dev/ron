@@ -12,14 +12,14 @@ class ClassBuilder extends Builder {
     protected $interfaces = [];
 
     /**
-     * The classes this class extends
+     * The class this class extends
      *
-     * @var array
+     * @var null|string
      */
-    protected $classes = [];
+    protected $class = null;
 
     /**
-     * The methods
+     * The methods this class has
      *
      * @var array
      */
@@ -43,9 +43,9 @@ class ClassBuilder extends Builder {
             $implements = ' implements '.\implode(', ', $this->interfaces);
         }
 
-        if ( ! empty($this->classes))
+        if ( ! empty($this->class))
         {
-            $extends = ' extends '.\implode(', ', $this->classes);
+            $extends = ' extends '.$this->class;
         }
 
         if ( ! empty($this->methods))
@@ -86,7 +86,7 @@ class ClassBuilder extends Builder {
      */
     public function extend($class)
     {
-        $this->classes[] = $class;
+        $this->class = $class;
     }
 
 }

@@ -46,10 +46,6 @@ class ClassBuilderSpec extends ObjectBehavior {
         $this->extend('bar');
 
         $this->build()->shouldReturn('class foo extends bar {  }');
-
-        $this->extend('baz');
-
-        $this->build()->shouldReturn('class foo extends bar, baz {  }');
     }
 
     function it_places_the_elements_correctly()
