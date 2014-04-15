@@ -27,6 +27,16 @@ class TransformerSpec extends ObjectBehavior {
         $builder = $this->transformParameter($parameter);
         $builder->shouldHaveType('Ron\Builders\ParameterBuilder');
         $builder->shouldBeLike($model);
+
+        $model = new ParameterBuilder('foo');
+        $model->typeHint('array');
+
+        $parameter->isArray()->willReturn(true);
+        $parameter->getName()->willReturn('foo');
+        $parameter->isDefaultValueAvailable()->willReturn(false);
+        $parameter->getClass()->willReturn(null);
+
+        $this->transformParameter($parameter)->shouldBeLike($model);
     }
 
     function it_transforms_the_method(\ReflectionMethod $method)

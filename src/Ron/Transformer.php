@@ -77,6 +77,10 @@ class Transformer {
         {
             $builder->typeHint($class);
         }
+        elseif ($parameter->isArray())
+        {
+            $builder->typeHint('array');
+        }
 
         return $builder;
     }
