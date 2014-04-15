@@ -42,22 +42,24 @@ So now that you've successfully created an instance of `\Ron\Ron`, you can call 
 $entity = $ron->create();
 ```
 
-And the `$entity` variable will have type `\Ron\Entity`, so you can call:
+Now that the `$entity` variable has type `\Ron\Entity`, here is what you can do:
 
-+ `getCode()` returns the valid PHP class declaration
-+ `apply()` evaluates the code using `eval`
-+ `getClassName()` returns the class name used (e.g. `class\_ff3453363262dssfwgw`)  
++ `getCode()`: returns the valid PHP class declaration
++ `apply()`: evaluates the code using `eval`
++ `getClassName()`: returns the class name used (e.g. `class\_ff3453363262dssfwgw`)  
 
 To finish, let me show you just a very basic example:
 
 
 ```php
-$entity = (new \Ron\Ron(new \ReflectionClass('demo\Baz')))->create();
+$methods = ['wow' => 'Hello, world!'];
+
+$entity = (new \Ron\Ron(new \ReflectionClass('demo\Baz')))->create($methods);
 
 $entity->apply();
 $name = $entity->getClassName();
 
-(new $name)->wow('Hey!');
+(new $name)->wow('Hey!'); // Hello, world!
 ```
 
 That's it, have any questions?
