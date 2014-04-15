@@ -28,11 +28,13 @@ class ParameterBuilder extends Builder {
     /**
      * Adds the type hint
      *
-     * @param string $class
+     * @param mixed $class
      * @return void
      */
     public function typeHint($class)
     {
+        if (\is_object($class)) $class = \get_class($class);
+
         $this->typeHint = $class;
     }
 
