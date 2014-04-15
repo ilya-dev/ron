@@ -54,15 +54,32 @@ class Ron {
     /**
      * Creates a new class
      *
-     * @param array $methods
+     * @param array $returnValues
      * @return \Ron\Entity
      */
-    public function create(array $methods = [])
+    public function create(array $returnValues = [])
     {
         $methods = $this->getMethods();
 
-        // just make it green
-        return new Entity('code');
+        $class = $this->transformer->transform($this->reflector);
+
+        foreach ($methods as $method)
+        {
+            /**
+             * @var $method \ReflectionMethod
+             */
+
+            $returnValue = null;
+
+            if (\array_key_exists($key = $method->getName(), $returnValues))
+            {
+                $returnValue = $returnValues[$key];
+            }
+
+            $class->method($this->transformer->transformMethod($method, $returnValue));
+        }
+
+        return new Entity($class->build());
     }
 
     /**

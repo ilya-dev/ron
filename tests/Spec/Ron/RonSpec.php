@@ -3,6 +3,7 @@
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use ReflectionClass as Reflector;
+use ReflectionMethod as Method;
 
 class RonSpec extends ObjectBehavior {
 
@@ -23,10 +24,17 @@ class RonSpec extends ObjectBehavior {
         $this->getReflector()->shouldReturn($reflector);
     }
 
-    function it_creates_a_new_class(Reflector $reflector)
+    function it_creates_a_new_class(Reflector $reflector, Method $method)
     {
-        // $reflector->isInterface()->shouldBeCalled();
-        // $reflector->getMethods(Argument::any())->shouldBeCalled();
+        $reflector->getName()->willReturn('foo');
+        $reflector->isInterface()->willReturn(true);
+        $reflector->getMethods()->willReturn([$method]);
+        $reflector->getInterfaceNames()->willReturn([$method]);
+        $reflector->getParentClass()->willReturn(false);
+
+        $method->getName()->willReturn('bar');
+        $method->isPrivate()->willReturn(true);
+        $method->getParameters()->willReturn([]);
 
         $this->create()->shouldHaveType('Ron\Entity');
     }

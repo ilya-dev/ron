@@ -39,6 +39,7 @@ class TransformerSpec extends ObjectBehavior {
         $method->isPrivate()->willReturn(false);
         $method->isProtected()->willReturn(true);
         $method->isPublic()->shouldNotBeCalled();
+        $method->getParameters()->willReturn([]);
 
         $builder = $this->transformMethod($method, 47);
         $builder->shouldHaveType('Ron\Builders\MethodBuilder');

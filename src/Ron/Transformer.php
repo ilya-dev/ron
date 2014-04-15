@@ -51,6 +51,11 @@ class Transformer {
 
         $builder->returnValue($returnValue);
 
+        foreach ($method->getParameters() as $parameter)
+        {
+            $builder->parameter($this->transformParameter($parameter));
+        }
+
         return $builder;
     }
 
