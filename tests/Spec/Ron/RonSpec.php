@@ -36,7 +36,10 @@ class RonSpec extends ObjectBehavior {
         $method->isPrivate()->willReturn(true);
         $method->getParameters()->willReturn([]);
 
-        $this->create()->shouldHaveType('Ron\Entity');
+        $entity = $this->create();
+
+        $entity->shouldHaveType('Ron\Entity');
+        $entity->getCode()->shouldBe('class foo implements wow { private function bar() {  } }');
     }
 
     function it_returns_the_methods_you_should_override_or_implement(\ReflectionClass $class)
