@@ -59,8 +59,25 @@ class Ron {
      */
     public function create(array $methods = [])
     {
+        $methods = $this->getMethods();
+
         // just make it green
         return new Entity('code');
+    }
+
+    /**
+     * Returns the methods you need to override/implement
+     *
+     * @return array
+     */
+    public function getMethods()
+    {
+        if ($this->reflector->isInterface())
+        {
+            return $this->reflector->getMethods();
+        }
+
+        return $this->reflector->getMethods(\ReflectionMethod::IS_ABSTRACT);
     }
 
 }

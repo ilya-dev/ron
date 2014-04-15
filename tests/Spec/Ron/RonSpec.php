@@ -31,5 +31,20 @@ class RonSpec extends ObjectBehavior {
         $this->create()->shouldHaveType('Ron\Entity');
     }
 
+    function it_returns_the_methods_you_should_override_or_implement(\ReflectionClass $class)
+    {
+        $class->isInterface()->willReturn(false);
+        $class->getMethods(\ReflectionMethod::IS_ABSTRACT)->willReturn(['foo', 'bar']);
+
+        $this->setReflector($class);
+        $this->getMethods()->shouldReturn(['foo', 'bar']);
+
+        $class->isInterface()->willReturn(true);
+        $class->getMethods()->willReturn(['foo', 'bar', 'baz']);
+
+        $this->setReflector($class);
+        $this->getMethods()->shouldReturn(['foo', 'bar', 'baz']);
+    }
+
 }
 
