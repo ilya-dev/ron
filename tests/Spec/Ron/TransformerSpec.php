@@ -50,11 +50,8 @@ class TransformerSpec extends ObjectBehavior {
     {
         $model = new ClassBuilder('foo');
         $model->extend('foo');
-        $model->implement('baz');
-        $model->implement('wow');
 
         $class->getName()->willReturn('foo');
-        $class->getInterfaceNames()->willReturn(['baz', 'wow']);
         $class->isInterface()->willReturn(false);
 
         $builder = $this->transform($class);

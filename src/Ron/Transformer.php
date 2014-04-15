@@ -16,10 +16,9 @@ class Transformer {
         {
             $builder->extend($reflector->getName());
         }
-
-        foreach ($reflector->getInterfaceNames() as $interface)
+        else
         {
-            $builder->implement($interface);
+            $builder->implement($reflector->getName());
         }
 
         return $builder;

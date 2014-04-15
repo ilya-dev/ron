@@ -29,8 +29,6 @@ class RonSpec extends ObjectBehavior {
         $reflector->getName()->willReturn('foo');
         $reflector->isInterface()->willReturn(true);
         $reflector->getMethods()->willReturn([$method]);
-        $reflector->getInterfaceNames()->willReturn(['wow']);
-        $reflector->getParentClass()->willReturn(false);
 
         $method->getName()->willReturn('bar');
         $method->isPrivate()->willReturn(true);
@@ -39,7 +37,7 @@ class RonSpec extends ObjectBehavior {
         $entity = $this->create();
 
         $entity->shouldHaveType('Ron\Entity');
-        $entity->getCode()->shouldContain(' implements wow { private function bar() {  } }');
+        $entity->getCode()->shouldContain(' { private function bar() {  } }');
     }
 
     function it_returns_the_methods_you_should_override_or_implement(\ReflectionClass $class)
