@@ -9,14 +9,14 @@ class ClassBuilder extends Builder {
      *
      * @var array
      */
-    protected $interfaces;
+    protected $interfaces = [];
 
     /**
      * The classes this class extends
      *
      * @var array
      */
-    protected $classes;
+    protected $classes = [];
 
     /**
      * The methods
@@ -24,21 +24,6 @@ class ClassBuilder extends Builder {
      * @var array
      */
     protected $methods = [];
-
-    /**
-     * The constructor
-     *
-     * @param string $name
-     * @return \Ron\Builders\ClassBuilder
-     */
-    public function __construct($name)
-    {
-        parent::__construct($name);
-
-        $this->interfaces = [];
-
-        $this->classes = [];
-    }
 
     /**
      * Builds the class (valid PHP code)
