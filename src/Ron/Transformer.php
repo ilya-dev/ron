@@ -32,7 +32,19 @@ class Transformer {
      */
     public function transformParameter(\ReflectionParameter $parameter)
     {
+        $builder = new Builders\ParameterBuilder($parameter->getName());
 
+        if ($parameter->isDefaultValueAvailable())
+        {
+            $builder->byDefault($parameter->getDefaultValue());
+        }
+
+        if ( ! \is_null($class = $parameter->getClass()))
+        {
+            $builder->typeHint($class);
+        }
+
+        return $builder;
     }
 
 }
