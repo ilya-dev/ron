@@ -24,7 +24,7 @@ class ParameterBuilderSpec extends ObjectBehavior {
     {
         $this->typeHint(new \stdClass);
 
-        $this->build()->shouldReturn('stdClass $foo');
+        $this->build()->shouldReturn('\stdClass $foo');
     }
 
     function it_appends_the_default_value()

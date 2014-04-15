@@ -6,7 +6,7 @@ abstract class DummyAbstract {
 
     abstract function overrideMe($foo = 'test', $bar);
 
-    abstract function overrideMeToo(\stdClass $baz, \stdClass $wow = null);
+    abstract function overrideMeToo(\stdClass $baz, \stdClass $wow = NULL);
 
 }
 
