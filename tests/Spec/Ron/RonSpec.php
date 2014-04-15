@@ -39,7 +39,7 @@ class RonSpec extends ObjectBehavior {
         $entity = $this->create();
 
         $entity->shouldHaveType('Ron\Entity');
-        $entity->getCode()->shouldBe('class foo implements wow { private function bar() {  } }');
+        $entity->getCode()->shouldContain(' implements wow { private function bar() {  } }');
     }
 
     function it_returns_the_methods_you_should_override_or_implement(\ReflectionClass $class)
@@ -55,6 +55,21 @@ class RonSpec extends ObjectBehavior {
 
         $this->setReflector($class);
         $this->getMethods()->shouldReturn(['foo', 'bar', 'baz']);
+    }
+
+    /**
+     * Returns the inline matchers
+     *
+     * @return array
+     */
+    public function getMatchers()
+    {
+        return [
+            'contain' => function($subject, $string)
+            {
+                return \strpos($subject, $string) !== false;
+            }
+        ];
     }
 
 }

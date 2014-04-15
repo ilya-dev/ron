@@ -41,7 +41,7 @@ class EntitySpec extends ObjectBehavior {
     {
         $this->setCode($code = 'class foo {  }');
 
-        $this->resolveNamingConflicts();    
+        $this->resolveNamingConflicts();
 
         $this->getCode()->shouldNotBeEqualTo($code);
     }
