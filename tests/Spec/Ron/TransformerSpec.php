@@ -2,6 +2,7 @@
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Ron\Builders\ClassBuilder;
 use Ron\Builders\ParameterBuilder;
 use Ron\Builders\MethodBuilder;
 
@@ -41,6 +42,24 @@ class TransformerSpec extends ObjectBehavior {
 
         $builder = $this->transformMethod($method, 47);
         $builder->shouldHaveType('Ron\Builders\MethodBuilder');
+        $builder->shouldBeLike($model);
+    }
+
+    function it_transforms_the_class(\ReflectionClass $class, \ReflectionClass $parent)
+    {
+        $model = new ClassBuilder('foo');
+        $model->extend('bar');
+        $model->implement('baz');
+        $model->implement('wow');
+
+        $parent->getName()->willReturn('bar');
+
+        $class->getName()->willReturn('foo');
+        $class->getInterfaceNames()->willReturn(['baz', 'wow']);
+        $class->getParentClass()->willReturn($parent);
+
+        $builder = $this->transform($class);
+        $builder->shouldHaveType('Ron\Builders\ClassBuilder');
         $builder->shouldBeLike($model);
     }
 

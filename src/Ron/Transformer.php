@@ -10,7 +10,19 @@ class Transformer {
      */
     public function transform(\ReflectionClass $reflector)
     {
+        $builder = new Builders\ClassBuilder($reflector->getName());
 
+        if ($class = $reflector->getParentClass())
+        {
+            $builder->extend($class->getName());
+        }
+
+        foreach ($reflector->getInterfaceNames() as $interface)
+        {
+            $builder->implement($interface);
+        }
+
+        return $builder;
     }
 
     /**
