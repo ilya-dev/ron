@@ -37,6 +37,8 @@ class Entity {
         $this->setCode($code);
 
         $this->evalWorker = $worker ?: new EvalWorker;
+
+        $this->resolveNamingConflicts();
     }
 
     /**
@@ -89,6 +91,16 @@ class Entity {
     }
 
     /**
+     * Modifies the code so it won't produce naming conflicts
+     *
+     * @return void
+     */
+    public function resolveNamingConflicts()
+    {
+        $this->code = \preg_replace('/^class (\w+)/', $this->className, $this->code);
+    }
+
+    /**
      * Generates the unique class name
      *
      * @return string
@@ -101,7 +113,7 @@ class Entity {
         }
         while (\class_exists($name));
 
-        return $name;
+        return \preg_replace('/[^a-z0-9]/i', '', $name);
     }
 
 }

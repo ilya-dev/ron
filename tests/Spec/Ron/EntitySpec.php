@@ -37,6 +37,15 @@ class EntitySpec extends ObjectBehavior {
         $this->apply();
     }
 
+    function it_resolves_naming_conflicts()
+    {
+        $this->setCode($code = 'class foo {  }');
+
+        $this->resolveNamingConflicts();    
+
+        $this->getCode()->shouldNotBeEqualTo($code);
+    }
+
     /**
      * Returns the inline matchers
      *
