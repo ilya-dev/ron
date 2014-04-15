@@ -12,9 +12,9 @@ class Transformer {
     {
         $builder = new Builders\ClassBuilder($reflector->getName());
 
-        if ($class = $reflector->getParentClass())
+        if ( ! $reflector->isInterface())
         {
-            $builder->extend($class->getName());
+            $builder->extend($reflector->getName());
         }
 
         foreach ($reflector->getInterfaceNames() as $interface)

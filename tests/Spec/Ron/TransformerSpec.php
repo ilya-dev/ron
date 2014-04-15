@@ -46,21 +46,20 @@ class TransformerSpec extends ObjectBehavior {
         $builder->shouldBeLike($model);
     }
 
-    function it_transforms_the_class(\ReflectionClass $class, \ReflectionClass $parent)
+    function it_transforms_the_class(\ReflectionClass $class)
     {
         $model = new ClassBuilder('foo');
-        $model->extend('bar');
+        $model->extend('foo');
         $model->implement('baz');
         $model->implement('wow');
 
-        $parent->getName()->willReturn('bar');
-
         $class->getName()->willReturn('foo');
         $class->getInterfaceNames()->willReturn(['baz', 'wow']);
-        $class->getParentClass()->willReturn($parent);
+        $class->isInterface()->willReturn(false);
 
         $builder = $this->transform($class);
         $builder->shouldHaveType('Ron\Builders\ClassBuilder');
+
         $builder->shouldBeLike($model);
     }
 
