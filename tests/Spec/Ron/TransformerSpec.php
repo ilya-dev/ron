@@ -3,6 +3,7 @@
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Ron\Builders\ParameterBuilder;
+use Ron\Builders\MethodBuilder;
 
 class TransformerSpec extends ObjectBehavior {
 
@@ -24,6 +25,22 @@ class TransformerSpec extends ObjectBehavior {
 
         $builder = $this->transformParameter($parameter);
         $builder->shouldHaveType('Ron\Builders\ParameterBuilder');
+        $builder->shouldBeLike($model);
+    }
+
+    function it_transforms_the_method(\ReflectionMethod $method)
+    {
+        $model = new MethodBuilder('foo');
+        $model->returnValue(47);
+        $model->visibility('protected');
+
+        $method->getName()->willReturn('foo');
+        $method->isPrivate()->willReturn(false);
+        $method->isProtected()->willReturn(true);
+        $method->isPublic()->shouldNotBeCalled();
+
+        $builder = $this->transformMethod($method, 47);
+        $builder->shouldHaveType('Ron\Builders\MethodBuilder');
         $builder->shouldBeLike($model);
     }
 

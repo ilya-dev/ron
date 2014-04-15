@@ -17,11 +17,29 @@ class Transformer {
      * Transforms \ReflectionMethod to \Ron\Builders\MethodBuilder
      *
      * @param \ReflectionMethod $method
+     * @param mixed|null $returnValue
      * @return Builders\MethodBuilder
      */
-    public function transformMethod(\ReflectionMethod $method)
+    public function transformMethod(\ReflectionMethod $method, $returnValue = null)
     {
+        $builder = new Builders\MethodBuilder($method->getName());
 
+        if ($method->isPrivate())
+        {
+            $builder->visibility('private');
+        }
+        elseif ($method->isProtected())
+        {
+            $builder->visibility('protected');
+        }
+        else
+        {
+            $builder->visibility('public');
+        }
+
+        $builder->returnValue($returnValue);
+
+        return $builder;
     }
 
     /**
