@@ -5,11 +5,11 @@ use Ron\Builder;
 class ClassBuilder extends Builder {
 
     /**
-     * The interfaces this class implements
+     * The interface this class implements
      *
-     * @var array
+     * @var null|string
      */
-    protected $interfaces = [];
+    protected $interface = null;
 
     /**
      * The class this class extends
@@ -38,9 +38,9 @@ class ClassBuilder extends Builder {
 
         $methods = '';
 
-        if ( ! empty($this->interfaces))
+        if ( ! empty($this->interface))
         {
-            $implements = ' implements '.\implode(', ', $this->interfaces);
+            $implements = ' implements '.$this->interface;
         }
 
         if ( ! empty($this->class))
@@ -75,7 +75,7 @@ class ClassBuilder extends Builder {
      */
     public function implement($interface)
     {
-        $this->interfaces[] = $interface;
+        $this->interface = $interface;
     }
 
     /**
