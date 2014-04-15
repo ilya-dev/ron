@@ -29,7 +29,7 @@ class RonSpec extends ObjectBehavior {
         $reflector->getName()->willReturn('foo');
         $reflector->isInterface()->willReturn(true);
         $reflector->getMethods()->willReturn([$method]);
-        $reflector->getInterfaceNames()->willReturn([$method]);
+        $reflector->getInterfaceNames()->willReturn(['wow']);
         $reflector->getParentClass()->willReturn(false);
 
         $method->getName()->willReturn('bar');
