@@ -97,7 +97,7 @@ class Entity {
      */
     public function resolveNamingConflicts()
     {
-        $this->code = \preg_replace('/^class (\w+)/', $this->className, $this->code);
+        $this->code = \preg_replace('/^class [_a-z0-9\\\\]+/i', $this->className, $this->code);
     }
 
     /**
@@ -113,7 +113,7 @@ class Entity {
         }
         while (\class_exists($name));
 
-        return \preg_replace('/[^a-z0-9]/i', '', $name);
+        return \preg_replace('/[^a-z0-9_]/i', '', $name);
     }
 
 }
